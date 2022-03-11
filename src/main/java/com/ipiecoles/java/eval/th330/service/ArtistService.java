@@ -28,6 +28,14 @@ public class ArtistService {
         return artistRepository.findAll(pageable);
     }
 
+    public Artist findByName(String name) {
+        Artist artist = this.artistRepository.findByName(name);
+        if(artist == null){
+            throw new EntityNotFoundException("Impossible de trouver l'artiste " + name);
+        }
+        return artist;
+    }
+
     public Artist findById(Long id) {
         Optional<Artist> artist = this.artistRepository.findById(id);
         if(!artist.isPresent()){
